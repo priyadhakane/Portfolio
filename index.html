@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Supriya Dhakane | Software Engineer &amp; Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Supriya Dhakane, a B.E. Computer Engineering graduate and Software Engineer Intern building full-stack business applications with Java, Spring Boot and Django."
+    />
+    <meta name="author" content="Supriya Dhakane" />
+    <meta
+      name="keywords"
+      content="Supriya Dhakane, Software Engineer, Full-Stack Developer, Computer Engineering, Java, Spring Boot, Django, Python, Portfolio"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Supriya Dhakane | Software Engineer & Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Supriya Dhakane, a B.E. Computer Engineering graduate and Software Engineer Intern building full-stack business applications with Java, Spring Boot and Django."
+    />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Supriya Dhakane | Software Engineer & Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Supriya Dhakane, a B.E. Computer Engineering graduate and Software Engineer Intern building full-stack business applications with Java, Spring Boot and Django."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Set the theme before first paint to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('portfolio-theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Supriya Dhakane",
+        "jobTitle": "Software Engineer Intern",
+        "description": "B.E. Computer Engineering graduate and Software Engineer Intern building full-stack business applications with Java, Spring Boot and Django.",
+        "email": "mailto:dhakanesupriya2@gmail.com",
+        "telephone": "+91-9561525353",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "LiteCode Software Pvt. Ltd."
+        },
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Zeal College of Engineering and Research, Narhe, Pune"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Bharati Vidyapeeth Jawaharlal Nehru Institute of Technology"
+          }
+        ],
+        "knowsLanguage": ["English", "Hindi", "Marathi"],
+        "knowsAbout": [
+          "Java",
+          "Spring Boot",
+          "Hibernate",
+          "Python",
+          "Django",
+          "JavaScript",
+          "SQL",
+          "MySQL",
+          "MongoDB"
+        ],
+        "sameAs": ["https://github.com/priyadhakane"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

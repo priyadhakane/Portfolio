@@ -1,0 +1,317 @@
+/* ===================================================================
+   Design tokens
+   =================================================================== */
+:root {
+  --navy-900: #0b1f3a;
+  --navy-800: #12294a;
+  --navy-700: #1c3a63;
+
+  /* Accent used as a solid fill (buttons) — keeps white text at AA in both themes */
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  /* Accent used as text / icons on a light or dark surface */
+  --accent-text: #1d4ed8;
+  --accent-soft: #e8f0fe;
+
+  --text: #1f2937;
+  --text-muted: #566072;
+  --heading: #0b1f3a;
+
+  --bg: #ffffff;
+  --bg-alt: #f5f7fa;
+  --surface: #ffffff;
+  --border: #e3e8ef;
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --error: #b42318;
+
+  --shadow-sm: 0 1px 2px rgba(11, 31, 58, 0.06);
+  --shadow-md: 0 10px 30px rgba(11, 31, 58, 0.08);
+
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --container: 1120px;
+  --nav-height: 72px;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-display: 'Sora', var(--font-sans);
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --accent-text: #8ab4ff;
+  --accent-soft: rgba(138, 180, 255, 0.12);
+
+  --text: #d5dde8;
+  --text-muted: #9aa7b8;
+  --heading: #f1f5f9;
+
+  --bg: #0e1726;
+  --bg-alt: #0b1220;
+  --surface: #131f33;
+  --border: #24324a;
+  --nav-bg: rgba(14, 23, 38, 0.9);
+  --error: #f4a19a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+/* ===================================================================
+   Reset & base
+   =================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--heading);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+section[id] {
+  scroll-margin-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================================================================
+   Layout helpers
+   =================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-block: 96px;
+}
+
+.section--alt {
+  background-color: var(--bg-alt);
+}
+
+.section__head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.section__eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section__title {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+}
+
+.section__subtitle {
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+}
+
+/* ===================================================================
+   Buttons
+   =================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-dark);
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--heading);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}
+
+.btn--on-dark {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.btn--on-dark:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===================================================================
+   Badges / chips
+   =================================================================== */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background-color: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ===================================================================
+   Cards
+   =================================================================== */
+.card {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+/* ===================================================================
+   Scroll reveal
+   =================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===================================================================
+   Accessibility helpers
+   =================================================================== */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 200;
+  background: var(--navy-900);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}

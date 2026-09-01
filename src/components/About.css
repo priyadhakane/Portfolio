@@ -1,0 +1,67 @@
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.about__intro p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-size: 1.02rem;
+}
+
+.about__strengths {
+  margin-top: 28px;
+}
+
+.about__strengths h3 {
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.about__cards {
+  display: grid;
+  gap: 16px;
+}
+
+.about__card {
+  display: flex;
+  gap: 16px;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.about__card-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 1.2rem;
+}
+
+.about__card h3 {
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+}
+
+.about__card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
