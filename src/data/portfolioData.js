@@ -8,10 +8,13 @@ export const profile = {
   name: 'Supriya Dhakane',
   initials: 'SD',
   title: 'Software Engineer Intern | Full-Stack Developer',
+  // Rotated in the hero headline. Each is supported by the resume:
+  // current internship role, Java/Django full-stack training, web-app projects.
+  roles: ['Software Engineer Intern', 'Full-Stack Developer', 'Web Developer'],
   tagline:
-    'B.E. Computer Engineering graduate and Software Engineer Intern at LiteCode Software, building full-stack business applications with Java, Spring Boot and Django.',
+    'B.E. Computer Engineering graduate and Software Engineer Intern at LiteCode Software pvt ltd, building full-stack business applications with Java, Spring Boot and Django.',
   summary:
-    'I am a self-motivated Computer Engineering graduate with hands-on experience from an internship and academic projects. I enjoy solving real-world problems and turning requirements into working software. My current focus is full-stack development with Java and Spring Boot on the backend and Django for rapid web applications, and I am looking to apply these skills in a growth-oriented team.',
+    'Computer Engineering graduate and Software Engineer Intern at LiteCode Software. I build full-stack applications with Java, Spring Boot and Django, and I am looking for a full-time role where I can keep growing as an engineer.',
   // The updated resume no longer lists a street address. Add a city/state here to
   // show it in the contact section and hero card.
   location: '',
@@ -40,23 +43,33 @@ export const CONTACT_FORM_ENDPOINT = '';
 export const skills = [
   {
     category: 'Programming Languages',
+    subtitle: 'Proficient across multiple paradigms',
+    accent: '#f59e0b',
     items: ['Java', 'Python', 'PHP', 'SQL'],
   },
   {
     category: 'Frontend',
+    subtitle: 'Building responsive, accessible interfaces',
+    accent: '#38bdf8',
     items: ['HTML', 'CSS', 'JavaScript'],
   },
   {
     category: 'Backend & Frameworks',
+    subtitle: 'Server-side applications and APIs',
+    accent: '#22c55e',
     items: ['Spring Boot', 'Hibernate', 'Django'],
   },
   {
     category: 'Databases',
+    subtitle: 'Relational and document data stores',
+    accent: '#a855f7',
     items: ['MySQL', 'MongoDB'],
   },
   {
     category: 'Tools & Productivity',
-    items: ['Git', 'GitHub', 'Postman', 'MS Office (Excel, Word, PowerPoint)'],
+    subtitle: 'Everyday development workflow',
+    accent: '#ec4899',
+    items: ['Git', 'GitHub', 'Postman', 'MS Office'],
   },
 ];
 
@@ -79,6 +92,8 @@ export const projects = [
   {
     name: 'BillBook ERP System',
     tag: 'Internship Project · LiteCode Software',
+    summary:
+      'ERP billing system built during my LiteCode internship — invoice generation and business record management.',
     description:
       'An ERP-based billing management system built during my internship at LiteCode Software, enabling streamlined invoicing and business record management.',
     problem:
@@ -95,6 +110,8 @@ export const projects = [
   {
     name: 'Places Explore – Jharkhand Tourism',
     tag: 'Spring Boot Project',
+    summary:
+      'Spring Boot tourism app showcasing places, culture and attractions across Jharkhand.',
     description:
       'A tourism web application built with Spring Boot that showcases places, culture and attractions across Jharkhand.',
     problem:
@@ -110,6 +127,8 @@ export const projects = [
   {
     name: 'E-Commerce Website (Fruits & Vegetables)',
     tag: 'Django Project',
+    summary:
+      'Django storefront for ordering fruits and vegetables online, inspired by quick-commerce apps.',
     description:
       'A web application for buying fruits and vegetables online, inspired by quick-commerce platforms like Blinkit, built on a template-based Django architecture.',
     problem:
@@ -126,6 +145,8 @@ export const projects = [
   {
     name: 'ERP Management System',
     tag: 'Group Project',
+    summary:
+      'Team-built ERP application where I developed the profile management module.',
     description:
       'A team-built ERP application for managing organisational data. My contribution was the profile management module.',
     problem:
@@ -141,6 +162,8 @@ export const projects = [
   {
     name: 'Driving School Data Management System',
     tag: 'Academic Project',
+    summary:
+      'System to store and manage driving-school records such as student enrolment.',
     description:
       'A data management system to record and organise driving-school information such as student enrolment and related records.',
     problem:
@@ -167,7 +190,7 @@ export const education = [
     institution:
       'Bharati Vidyapeeth Jawaharlal Nehru Institute of Technology',
     period: '2021 – 2023',
-    score: 'Percentage: 73%',
+    score: 'Percentage: 83.40%',
   },
   {
     degree: 'HSC – Science',
@@ -206,12 +229,18 @@ export const certifications = [
   },
 ];
 
+// From the resume's "Strengths" line — kept exactly, not padded out.
+export const competencies = [
+  { name: 'Problem Solving', icon: 'bulb' },
+  { name: 'Self-Motivation', icon: 'spark' },
+  { name: 'Teamwork', icon: 'users' },
+];
+
 export const navLinks = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ];

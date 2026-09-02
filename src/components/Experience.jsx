@@ -11,13 +11,13 @@ export default function Experience() {
       title="Professional Experience"
       subtitle="My professional experience to date. I am open to full-time software engineering roles."
     >
-      <ol className="timeline">
+      <Reveal as="ol" className="timeline reveal--static">
         {experience.map((item, index) => (
           <Reveal
             as="li"
             key={`${item.role}-${item.company}`}
             className="timeline__item"
-            style={{ transitionDelay: `${index * 60}ms` }}
+            style={{ transitionDelay: `${index * 80}ms` }}
           >
             <div className="timeline__marker" aria-hidden="true" />
             <article className="timeline__card card">
@@ -50,7 +50,7 @@ export default function Experience() {
             </article>
           </Reveal>
         ))}
-      </ol>
+      </Reveal>
     </Section>
   );
 }

@@ -8,10 +8,13 @@ import Education from './components/Education.jsx';
 import Certifications from './components/Certifications.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
+import ScrollProgress from './components/ScrollProgress.jsx';
+import BackToTop from './components/BackToTop.jsx';
 
 export default function App() {
   return (
     <>
+      <ScrollProgress />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -27,6 +30,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

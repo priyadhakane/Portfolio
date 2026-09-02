@@ -1,22 +1,17 @@
 import { useEffect, useState } from 'react';
-import { FiMenu, FiX, FiDownload, FiSun, FiMoon } from 'react-icons/fi';
+import { FiDownload, FiSun, FiMoon } from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { navLinks, profile, contact } from '../data/portfolioData.js';
 import useTheme from '../hooks/useTheme.js';
+import { useScrolledPast } from '../hooks/useScroll.js';
+import { scrollToHash } from '../utils/motion.js';
 import './Navbar.css';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('#home');
+  const scrolled = useScrolledPast(8);
   const { theme, toggle } = useTheme();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     const sections = navLinks
@@ -46,11 +41,7 @@ export default function Navbar() {
   const handleNavClick = (event, href) => {
     event.preventDefault();
     setOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', href);
-    }
+    scrollToHash(href);
   };
 
   return (
@@ -61,7 +52,7 @@ export default function Navbar() {
           className="navbar__brand"
           onClick={(e) => handleNavClick(e, '#home')}
         >
-          {profile.name}
+          Supriya<span>.dev</span>
         </a>
 
         <ul id="primary-menu" className={`navbar__links ${open ? 'is-open' : ''}`}>
@@ -115,7 +106,11 @@ export default function Navbar() {
                 </a>
               )}
             </div>
-            <a className="btn btn--primary navbar__resume" href={profile.resumeUrl} download>
+            <a
+              className="btn btn--primary btn--download navbar__resume"
+              href={profile.resumeUrl}
+              download
+            >
               <FiDownload aria-hidden="true" /> Resume
             </a>
           </li>
@@ -123,13 +118,17 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="navbar__toggle"
+          className={`navbar__toggle ${open ? 'is-open' : ''}`}
           aria-expanded={open}
           aria-controls="primary-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+          <span className="navbar__toggle-box" aria-hidden="true">
+            <span className="navbar__toggle-bar" />
+            <span className="navbar__toggle-bar" />
+            <span className="navbar__toggle-bar" />
+          </span>
         </button>
       </nav>
     </header>

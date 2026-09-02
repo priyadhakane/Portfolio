@@ -1,18 +1,35 @@
 # Supriya Dhakane — Personal Portfolio
 
-A professional, responsive personal portfolio website built with React and Vite.
-All content is taken from Supriya Dhakane's resume.
+A responsive personal portfolio website built with React and Vite.
+**Every word of content comes from Supriya Dhakane's resume.**
+
+## Look & feel
+
+Dark-first design with a purple → pink accent, gradient section titles, a
+"Technical Arsenal" skill grid, project cards with a Grid/List toggle, drawn-in
+timelines and a two-column certifications / competencies layout. A light theme is
+available from the navbar toggle.
+
+The visual style was modelled on a reference design the owner liked. Only the
+**style** was reused — none of the reference's content. Not copied: its name,
+its projects and their invented metrics ("10+ Microservices", "API Endpoints 5+"),
+the CodSoft internship, the MERN stack, and badges like "Top 10% Achiever" /
+"Distinction Holder". All of that is absent because it is not in the resume.
 
 ## Tech Stack
 
 - **React 18** + **Vite 8** (modern JavaScript / JSX)
 - **HTML5** (semantic: `header`, `nav`, `main`, `section`, `article`, `footer`)
 - **CSS3** — hand-written, component-scoped stylesheets with CSS custom properties;
-  responsive layouts using CSS Grid and Flexbox; light/dark theming via
-  `:root[data-theme]` tokens
+  responsive layouts using CSS Grid and Flexbox; dark/light theming via
+  `:root[data-theme]` tokens (dark is the default)
 - **react-icons** — icon set
-- **IntersectionObserver** — a small custom hook (`useScrollReveal`) powers the
-  subtle fade-in-on-scroll animations. No heavyweight animation library is used.
+- **Animation: CSS transitions/keyframes + IntersectionObserver only.** No
+  animation library (no Framer Motion). `useScrollReveal` drives scroll-in
+  reveals; `useScroll` is a single shared rAF-throttled scroll store feeding the
+  navbar, reading-progress bar and back-to-top button. A shared `--ease` token
+  keeps every transition consistent. Everything degrades to static under
+  `prefers-reduced-motion`.
 - **Vitest** + Testing Library (dev only) — unit tests for form validation
 
 ## Project Structure
@@ -35,13 +52,20 @@ Portfolio/
     ├── data/
     │   └── portfolioData.js     # ALL content lives here (single source of truth)
     ├── hooks/
-    │   ├── useScrollReveal.js
-    │   └── useTheme.js          # light/dark toggle + localStorage
+    │   ├── useScrollReveal.js          # per-element scroll-in reveal
+    │   ├── useScroll.js                # shared rAF scroll store (Y / progress / past-threshold)
+    │   ├── usePrefersReducedMotion.js  # reactive reduced-motion for JS animation
+    │   └── useTheme.js                 # light/dark toggle + localStorage + switch transition
     ├── utils/
+    │   ├── motion.js                   # prefersReducedMotion + reduced-motion-aware scroll helpers
+    │   ├── skillIcons.jsx              # skill name -> brand icon (react-icons/si)
     │   ├── validateContactForm.js
     │   └── validateContactForm.test.js
     └── components/
         ├── Reveal.jsx / Section.jsx      # reusable layout primitives
+        ├── RotatingText.jsx  + .css      # hero role cross-fade
+        ├── ScrollProgress.jsx + .css     # top reading-progress bar
+        ├── BackToTop.jsx      + .css     # back-to-top button
         ├── Navbar.jsx  + Navbar.css
         ├── Hero.jsx    + Hero.css
         ├── About.jsx   + About.css
@@ -56,11 +80,20 @@ Portfolio/
 
 ## Components Created
 
-`Navbar` (sticky, scroll shadow, active-link highlighting, hamburger menu,
-GitHub link, theme toggle, Resume button), `Hero`, `About`, `Skills`,
-`Experience`, `Projects`, `Education`, `Certifications`, `Contact`, `Footer`,
-plus reusable primitives `Section` and `Reveal`, and the hooks
-`useScrollReveal` and `useTheme`.
+`Navbar` (gradient wordmark, sticky glass bar, active-link highlighting,
+hover-underline links, morphing hamburger, staggered mobile menu, theme toggle,
+Resume button), `Hero` (centered layout, drifting colour blobs, rotating role
+text, staggered entrance, quick-fact pills), `About` (hub-and-spoke pillars
+diagram with drawn-in connectors), `Skills` (Technical-Arsenal category grid with
+per-category accent + brand skill icons + academic-figures pill), `Experience`
+(timeline-line draw-in), `Projects` (Grid/List view toggle, gradient card
+headers, arrow micro-move), `Education` ("Academic Journey" timeline),
+`Certifications` (two columns: training cards + Core Competencies from the
+resume's three strengths), `Contact` (contact-card grid, focus styling, error
+shake, submit spinner), `Footer`, `RotatingText`, `ScrollProgress`, `BackToTop`,
+plus reusable primitives
+`Section` and `Reveal`, and hooks `useScrollReveal`, `useScroll`,
+`usePrefersReducedMotion`, `useTheme`.
 
 ## Run Locally
 
@@ -156,6 +189,28 @@ details and navigation. Components contain no hard-coded copy.
 - `color-scheme` set per theme; palette targets WCAG AA contrast in light & dark
 - Page title, meta description, Open Graph, Twitter card, and JSON-LD `Person`
 - No-flash theme applied before first paint via a tiny inline script
+
+## Interactions & Animation
+
+- Scroll-reveal (fade-up, plus left/static variants) on section headings and card
+  groups, with a short stagger between siblings
+- Hero: staggered entrance, cross-fading role text, one slow-drifting accent glow
+- Navbar: scroll state, active section, hover-underline, morphing hamburger,
+  staggered mobile menu
+- Reading-progress bar (top) and back-to-top button (both fed by one shared
+  scroll listener)
+- Hover: `translateY(-4px)` card elevation, icon scale (1.08), badge/chip lift,
+  button elevation + icon nudge, animated link underlines — all behind
+  `@media (hover: hover)` so touch devices don't get stuck states
+- Contact form: focus-within label colour, invalid-field border, error shake,
+  submit spinner, status fade-in
+- Light/dark toggle with a 320 ms one-shot colour transition
+- Everything is gated on `prefers-reduced-motion` — the site is fully usable and
+  professional with all motion disabled
+
+**Intentionally skipped:** custom cursor (doesn't suit a formal portfolio),
+loading screen, project category filters (5 projects, mostly unstated stacks —
+categories would be trivial or invented), parallax, particles, 3D/flip effects.
 
 ## Suggested Future Improvements
 

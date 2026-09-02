@@ -8,31 +8,32 @@ export default function Education() {
   return (
     <Section
       id="education"
-      eyebrow="Education"
+      eyebrow="Academic Journey"
       title="Education"
-      subtitle="My academic background, most recent first."
+      subtitle="Consistent academic performance with a strong technical foundation."
     >
-      <div className="education__list">
+      <Reveal as="ol" className="edu reveal--static">
         {education.map((item, index) => (
           <Reveal
+            as="li"
             key={item.degree}
-            className="education__card card"
-            style={{ transitionDelay: `${index * 60}ms` }}
+            className="edu__item"
+            style={{ transitionDelay: `${index * 70}ms` }}
           >
-            <span className="education__icon" aria-hidden="true">
+            <span className="edu__marker" aria-hidden="true">
               <FiAward />
             </span>
-            <div className="education__body">
-              <div className="education__row">
+            <article className="edu__card card">
+              <div className="edu__row">
                 <h3>{item.degree}</h3>
-                <span className="education__period">{item.period}</span>
+                <span className="edu__period">{item.period}</span>
               </div>
-              <p className="education__inst">{item.institution}</p>
-              <p className="education__score">{item.score}</p>
-            </div>
+              <p className="edu__inst">{item.institution}</p>
+              <p className="edu__score">{item.score}</p>
+            </article>
           </Reveal>
         ))}
-      </div>
+      </Reveal>
     </Section>
   );
 }

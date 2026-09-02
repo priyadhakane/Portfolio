@@ -100,9 +100,9 @@ export default function Contact() {
   return (
     <Section
       id="contact"
-      eyebrow="Contact"
-      title="Get In Touch"
-      subtitle="I am open to full-time software engineering roles and collaboration. Feel free to reach out."
+      eyebrow="Get In Touch"
+      title="Let's Connect"
+      subtitle="Open to full-time software roles, collaboration and tech discussions. Let's build something together."
     >
       <div className="contact__grid">
         <Reveal className="contact__info">
@@ -131,6 +131,7 @@ export default function Contact() {
 
         <Reveal className="contact__form-wrap">
           <form className="contact__form" onSubmit={handleSubmit} noValidate>
+            <h3 className="contact__form-title">Send a Message</h3>
             <div className="contact__honeypot" aria-hidden="true">
               <label htmlFor="website">Leave this field empty</label>
               <input
@@ -156,7 +157,7 @@ export default function Contact() {
                 aria-describedby={errors.name ? 'name-error' : undefined}
               />
               {errors.name && (
-                <p className="contact__error" id="name-error">
+                <p className="contact__error" id="name-error" role="alert">
                   {errors.name}
                 </p>
               )}
@@ -174,7 +175,7 @@ export default function Contact() {
                 aria-describedby={errors.email ? 'email-error' : undefined}
               />
               {errors.email && (
-                <p className="contact__error" id="email-error">
+                <p className="contact__error" id="email-error" role="alert">
                   {errors.email}
                 </p>
               )}
@@ -192,7 +193,7 @@ export default function Contact() {
                 aria-describedby={errors.subject ? 'subject-error' : undefined}
               />
               {errors.subject && (
-                <p className="contact__error" id="subject-error">
+                <p className="contact__error" id="subject-error" role="alert">
                   {errors.subject}
                 </p>
               )}
@@ -210,7 +211,7 @@ export default function Contact() {
                 aria-describedby={errors.message ? 'message-error' : undefined}
               />
               {errors.message && (
-                <p className="contact__error" id="message-error">
+                <p className="contact__error" id="message-error" role="alert">
                   {errors.message}
                 </p>
               )}
@@ -221,7 +222,14 @@ export default function Contact() {
               className="btn btn--primary contact__submit"
               disabled={status === 'sending'}
             >
-              {status === 'sending' ? 'Sending…' : 'Send Message'}
+              {status === 'sending' ? (
+                <>
+                  <span className="contact__spinner" aria-hidden="true" />
+                  Sending&hellip;
+                </>
+              ) : (
+                'Send Message'
+              )}
             </button>
 
             <p className="contact__status" role="status" aria-live="polite">

@@ -1,6 +1,7 @@
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { profile, contact, navLinks } from '../data/portfolioData.js';
+import { scrollToHash } from '../utils/motion.js';
 import './Footer.css';
 
 export default function Footer() {
@@ -8,8 +9,7 @@ export default function Footer() {
 
   const handleNavClick = (event, href) => {
     event.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-    history.replaceState(null, '', href);
+    scrollToHash(href);
   };
 
   return (

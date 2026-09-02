@@ -7,40 +7,63 @@
 
 .contact__info ul {
   display: grid;
-  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
 .contact__info li {
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 22px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  transition: transform 0.22s var(--ease), border-color 0.22s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .contact__info li:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
 }
 
 .contact__icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--accent-soft);
+  background: var(--grad-soft);
+  border: 1px solid var(--border-strong);
   color: var(--accent-text);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  transition: transform 0.25s var(--ease);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .contact__info li:hover .contact__icon {
+    transform: scale(1.08);
+  }
 }
 
 .contact__label {
   display: block;
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--heading);
   margin-bottom: 2px;
 }
 
 .contact__info a,
 .contact__info div > span:last-child {
-  color: var(--heading);
+  color: var(--text-muted);
+  font-size: 0.86rem;
   font-weight: 500;
   word-break: break-word;
 }
@@ -50,11 +73,17 @@
 }
 
 .contact__form {
-  background-color: var(--bg);
+  background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 30px;
   box-shadow: var(--shadow-sm);
+}
+
+.contact__form-title {
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .contact__honeypot {
@@ -75,6 +104,11 @@
   font-weight: 600;
   color: var(--heading);
   margin-bottom: 6px;
+  transition: color 0.2s ease;
+}
+
+.contact__field:focus-within label {
+  color: var(--accent-text);
 }
 
 .contact__field input,
@@ -87,14 +121,25 @@
   font-size: 0.95rem;
   color: var(--text);
   background-color: var(--surface);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .contact__field input:focus,
 .contact__field textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18);
+}
+
+.contact__field input[aria-invalid='true'],
+.contact__field textarea[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.contact__field input[aria-invalid='true']:focus,
+.contact__field textarea[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.14);
 }
 
 .contact__field textarea {
@@ -106,6 +151,26 @@
   color: var(--error);
   font-size: 0.82rem;
   margin-top: 6px;
+  animation: contact-shake 0.32s var(--ease) both;
+}
+
+@keyframes contact-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__error {
+    animation: none;
+  }
 }
 
 .contact__submit {
@@ -113,8 +178,23 @@
 }
 
 .contact__submit:disabled {
-  opacity: 0.7;
+  opacity: 0.75;
   cursor: not-allowed;
+}
+
+.contact__spinner {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: contact-spin 0.7s linear infinite;
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .contact__status:not(:empty) {
@@ -122,6 +202,18 @@
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--accent-text);
+  animation: contact-status-in 0.3s var(--ease) both;
+}
+
+@keyframes contact-status-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .contact__note {

@@ -1,7 +1,8 @@
 import {
-  FiTarget,
-  FiCode,
   FiBookOpen,
+  FiCode,
+  FiZap,
+  FiTarget,
   FiGlobe,
 } from 'react-icons/fi';
 import Section from './Section.jsx';
@@ -9,27 +10,50 @@ import Reveal from './Reveal.jsx';
 import { profile } from '../data/portfolioData.js';
 import './About.css';
 
-const highlights = [
+/**
+ * Five short "pillars" shown as a hub-and-spoke diagram.
+ * Each line is deliberately one scannable phrase.
+ */
+const pillars = [
   {
+    key: 'education',
+    label: 'Education',
     icon: <FiBookOpen aria-hidden="true" />,
-    title: 'Education',
-    text: 'B.E. in Computer Engineering from Zeal College of Engineering and Research, Pune (83.88%), following a Diploma in Computer Engineering.',
+    text: 'B.E. Computer Engineering · 83.88%',
   },
   {
+    key: 'focus',
+    label: 'Current Focus',
     icon: <FiCode aria-hidden="true" />,
-    title: 'Current focus',
-    text: 'Full-stack development with Java and Spring Boot on the backend, and Django for rapid web applications.',
+    text: 'Java, Spring Boot & Django',
   },
   {
+    key: 'strengths',
+    label: 'Strengths',
+    icon: <FiZap aria-hidden="true" />,
+    text: 'Problem-solving · Teamwork',
+  },
+  {
+    key: 'objective',
+    label: 'Career Objective',
     icon: <FiTarget aria-hidden="true" />,
-    title: 'Career objective',
-    text: 'To join a team where I can contribute to real projects, keep learning, and grow into a well-rounded software engineer.',
+    text: 'Grow into a well-rounded engineer',
   },
   {
+    key: 'languages',
+    label: 'Languages',
     icon: <FiGlobe aria-hidden="true" />,
-    title: 'Languages',
-    text: profile.languages.join(', '),
+    text: profile.languages.join(' · '),
   },
+];
+
+// Line end-points (in a 0–100 box) that match the CSS node positions below.
+const nodePoints = [
+  [50, 12],
+  [86, 40],
+  [70, 88],
+  [30, 88],
+  [14, 40],
 ];
 
 export default function About() {
@@ -38,49 +62,54 @@ export default function About() {
       id="about"
       eyebrow="About"
       title="About Me"
-      subtitle="A short introduction to my background, interests and goals."
+      subtitle="A quick snapshot of who I am and what I bring to a team."
     >
-      <div className="about__grid">
-        <Reveal className="about__intro">
-          <p>{profile.summary}</p>
-          <p>
-            I completed a Diploma in Computer Engineering before my degree, which
-            gave me an early, hands-on start with programming fundamentals. I am
-            currently a Software Engineer Intern at LiteCode Software, where I
-            contribute to real business applications and completed the BillBook
-            ERP System. Alongside this I have finished training programmes in Java
-            full-stack, Python and Django, and built academic and group projects
-            that put those skills into practice.
-          </p>
+      <Reveal className="about__intro">
+        <p>{profile.summary}</p>
+      </Reveal>
 
-          <div className="about__strengths">
-            <h3>Strengths</h3>
-            <ul className="chip-list">
-              {profile.strengths.map((item) => (
-                <li key={item} className="badge">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-
-        <div className="about__cards">
-          {highlights.map((item, index) => (
-            <Reveal
-              key={item.title}
-              className="about__card"
-              style={{ transitionDelay: `${index * 60}ms` }}
-            >
-              <span className="about__card-icon">{item.icon}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </Reveal>
+      <Reveal className="pillars reveal--static">
+        <svg
+          className="pillars__links"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {nodePoints.map(([x, y]) => (
+            <line
+              key={`${x}-${y}`}
+              className="pillars__link"
+              x1="50"
+              y1="50"
+              x2={x}
+              y2={y}
+              pathLength="1"
+              vectorEffect="non-scaling-stroke"
+            />
           ))}
+        </svg>
+
+        <div className="pillars__hub">
+          <span className="pillars__hub-initials">{profile.initials}</span>
+          <span className="pillars__hub-label">Computer Engineer</span>
         </div>
-      </div>
+
+        <ul className="pillars__list">
+          {pillars.map((pillar, index) => (
+            <li
+              key={pillar.key}
+              className="pillars__node"
+              style={{ '--i': index }}
+            >
+              <span className="pillars__badge">{pillar.icon}</span>
+              <div className="pillars__body">
+                <h3>{pillar.label}</h3>
+                <p>{pillar.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </Section>
   );
 }

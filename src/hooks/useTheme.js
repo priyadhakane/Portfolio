@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { prefersReducedMotion } from '../utils/motion.js';
 
 const STORAGE_KEY = 'portfolio-theme';
 
@@ -9,12 +10,8 @@ function getInitialTheme() {
   } catch {
     /* localStorage unavailable — fall through */
   }
-  if (typeof window !== 'undefined' && window.matchMedia) {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  }
-  return 'light';
+  // Dark is the designed default; light is opt-in via the toggle.
+  return 'dark';
 }
 
 /**
@@ -32,8 +29,16 @@ export default function useTheme() {
     }
   }, [theme]);
 
-  const toggle = () =>
+  const toggle = () => {
+    // Briefly enable colour transitions just for the switch, then remove them
+    // so they never cost anything during normal interaction.
+    if (!prefersReducedMotion()) {
+      const root = document.documentElement;
+      root.classList.add('theme-switching');
+      window.setTimeout(() => root.classList.remove('theme-switching'), 320);
+    }
     setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+  };
 
   return { theme, toggle };
 }

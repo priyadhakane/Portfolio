@@ -12,7 +12,14 @@
   top: 6px;
   bottom: 6px;
   width: 2px;
-  background-color: var(--border);
+  background: var(--grad);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.8s var(--ease);
+}
+
+.timeline.is-visible::before {
+  transform: scaleY(1);
 }
 
 .timeline__item {
@@ -27,7 +34,25 @@
   height: 20px;
   border-radius: 50%;
   background-color: var(--surface);
-  border: 3px solid var(--accent);
+  border: 3px solid var(--accent-2);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.4s var(--ease), opacity 0.3s ease;
+}
+
+.timeline__item.is-visible .timeline__marker {
+  transform: scale(1);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline::before,
+  .timeline__marker {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .timeline__head {

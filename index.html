@@ -46,12 +46,8 @@
       (function () {
         try {
           var stored = localStorage.getItem('portfolio-theme');
-          var theme =
-            stored === 'light' || stored === 'dark'
-              ? stored
-              : window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light';
+          // Dark is the designed default; light is available via the toggle.
+          var theme = stored === 'light' ? 'light' : 'dark';
           document.documentElement.setAttribute('data-theme', theme);
         } catch (e) {
           /* ignore */
